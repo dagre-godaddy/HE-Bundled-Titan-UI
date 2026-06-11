@@ -1,0 +1,1793 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <title>HE-KIS — Email — Bundled cancellation UI mockups</title>
+  <link rel="stylesheet" type="text/css" href="https://kis.hosteurope.de/includes/hosteurope_01.css">
+  <link rel="stylesheet" type="text/css" href="https://kis.hosteurope.de/includes/hosteurope_faceLift.css">
+  <link rel="stylesheet" type="text/css" href="https://kis.hosteurope.de/includes/application/modules/administration/contract-overview/index.css">
+  <base href="https://kis.hosteurope.de/">
+  <style>
+/* Mockup-only styles — layered on top of KIS reference CSS */
+
+body.mockup-review { background: #e8e8e8; }
+
+.review-bar {
+  background: #1e1e1e;
+  color: #fff;
+  padding: 12px 24px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+  position: sticky;
+  top: 0;
+  z-index: 3000;
+}
+
+.review-bar label {
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: #aaa;
+}
+
+.variant-tabs { display: flex; gap: 6px; flex-wrap: wrap; }
+
+.variant-tab {
+  padding: 6px 14px;
+  border: 1px solid #555;
+  border-radius: 4px;
+  background: transparent;
+  color: #ccc;
+  font: inherit;
+  font-size: 12px;
+  cursor: pointer;
+}
+
+.variant-tab:hover { border-color: #888; color: #fff; }
+.variant-tab.active { background: #63b770; border-color: #63b770; color: #fff; }
+
+.review-meta {
+  margin-left: auto;
+  font-size: 12px;
+  color: #888;
+  max-width: 520px;
+  line-height: 1.45;
+}
+
+.hidden { display: none !important; }
+
+/* Variant 1 — footnotes */
+.bundled-sub {
+  display: block;
+  font-size: 11px;
+  color: #666;
+  margin-top: 3px;
+  line-height: 1.35;
+  text-transform: none;
+  font-weight: normal;
+}
+
+.bundled-sub sup {
+  font-size: 9px;
+  color: #63b770;
+  font-weight: 700;
+}
+
+.footnote-block {
+  margin-top: 8px;
+  padding: 10px 12px;
+  background: #f7f7f7;
+  border: 1px solid #ddd;
+  font-size: 12px;
+  line-height: 1.55;
+  color: #555;
+  text-align: left;
+}
+
+.footnote-block p { margin-bottom: 8px; }
+.footnote-block p:last-child { margin-bottom: 0; }
+
+/* Variant 2 — tooltips */
+.info-tip {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 16px;
+  height: 16px;
+  margin-left: 4px;
+  border-radius: 50%;
+  background: #63b770;
+  color: #fff;
+  font-size: 11px;
+  font-weight: 700;
+  font-style: normal;
+  cursor: help;
+  vertical-align: middle;
+  position: relative;
+}
+
+.info-tip .tip-content {
+  display: none;
+  position: absolute;
+  left: 50%;
+  bottom: calc(100% + 8px);
+  transform: translateX(-50%);
+  width: 320px;
+  padding: 10px 12px;
+  background: #fff;
+  border: 1px solid #63b770;
+  border-radius: 4px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.12);
+  font-size: 12px;
+  font-weight: normal;
+  line-height: 1.45;
+  color: #333;
+  text-align: left;
+  z-index: 50;
+}
+
+.info-tip:hover .tip-content,
+.info-tip:focus .tip-content { display: block; }
+
+/* Variant 3 — status badges */
+.status-badge {
+  display: inline-block;
+  padding: 4px 8px;
+  border-radius: 3px;
+  font-size: 11px;
+  font-weight: 600;
+  line-height: 1.35;
+  max-width: 170px;
+  text-transform: none;
+  text-align: left;
+}
+
+.status-badge.free {
+  background: #e8f5e9;
+  color: #2e7d32;
+  border: 1px solid #81c784;
+}
+
+.status-badge.cancel {
+  background: #fff8e1;
+  color: #e65100;
+  border: 1px solid #ffb74d;
+}
+
+.status-badge.paid {
+  background: #eceff1;
+  color: #546e7a;
+  border: 1px solid #b0bec5;
+}
+
+.status-detail {
+  display: block;
+  font-size: 10px;
+  font-weight: normal;
+  margin-top: 4px;
+}
+
+/* Variant 4 — row banner */
+.row-banner {
+  display: block;
+  margin-top: 6px;
+  padding: 6px 10px;
+  font-size: 11px;
+  line-height: 1.4;
+  text-transform: none;
+  font-weight: normal;
+  text-align: left;
+}
+
+.row-banner.free {
+  background: #e8f5e9;
+  border-left: 3px solid #63b770;
+  color: #2e5c32;
+}
+
+.row-banner.cancel {
+  background: #fff3e0;
+  border-left: 3px solid #ff9800;
+  color: #6d4c00;
+}
+
+/* Variant 5 — expandable */
+.contract-date {
+  display: block;
+  font-size: 11px;
+  color: #63b770;
+  font-weight: 600;
+  margin-top: 2px;
+  text-transform: none;
+}
+
+.contract-date.warn { color: #e65100; }
+
+.help-toggle {
+  display: inline-block;
+  margin-top: 4px;
+  font-size: 11px;
+  color: #0066cc;
+  cursor: pointer;
+  text-decoration: underline;
+  background: none;
+  border: none;
+  padding: 0;
+  font-family: inherit;
+}
+
+.help-panel {
+  display: none;
+  margin-top: 6px;
+  padding: 8px 10px;
+  background: #f0f7f1;
+  border: 1px solid #c8e6c9;
+  font-size: 11px;
+  line-height: 1.45;
+  color: #444;
+  border-radius: 3px;
+  max-width: 240px;
+  text-transform: none;
+  font-weight: normal;
+  text-align: left;
+}
+
+.help-panel.open { display: block; }
+
+/* Variant 7 — Bestellbestätigung (order confirmation) */
+.order-confirmation-frame {
+  max-width: 820px;
+  margin: 24px auto;
+  padding: 40px 48px 48px;
+  background: #fff;
+  border: 1px solid #ccc;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  font-family: Verdana, Arial, sans-serif;
+  font-size: 11px;
+  line-height: 1.5;
+  color: #333;
+  text-align: left;
+}
+
+.order-confirmation-frame .oc-header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 24px;
+  font-size: 10px;
+}
+
+.order-confirmation-frame .oc-title {
+  font-size: 18px;
+  font-weight: bold;
+  margin: 20px 0 16px;
+}
+
+.order-confirmation-frame .oc-address-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+  margin-bottom: 20px;
+}
+
+.order-confirmation-frame .oc-address-grid h4 {
+  margin: 0 0 8px;
+  font-size: 11px;
+}
+
+.order-confirmation-frame table.oc-products {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 16px 0;
+  font-size: 11px;
+}
+
+.order-confirmation-frame table.oc-products th,
+.order-confirmation-frame table.oc-products td {
+  border-bottom: 1px solid #ddd;
+  padding: 6px 8px;
+  text-align: left;
+}
+
+.order-confirmation-frame table.oc-products th:last-child,
+.order-confirmation-frame table.oc-products td:last-child {
+  text-align: right;
+}
+
+.order-confirmation-frame .oc-product-detail {
+  font-size: 10px;
+  color: #555;
+  margin: 4px 0 0 16px;
+  line-height: 1.45;
+}
+
+.order-confirmation-frame .oc-footnotes {
+  margin-top: 24px;
+  padding-top: 16px;
+  border-top: 1px solid #ddd;
+  font-size: 10px;
+  line-height: 1.55;
+}
+
+.order-confirmation-frame .oc-footnote-old {
+  color: #999;
+  text-decoration: line-through;
+  margin-bottom: 8px;
+}
+
+.order-confirmation-frame .oc-footnote-new {
+  background: #f0f7f1;
+  border-left: 3px solid #63b770;
+  padding: 8px 10px;
+  margin: 8px 0 12px;
+}
+
+.order-confirmation-frame .oc-pdf-link {
+  display: inline-block;
+  margin-top: 16px;
+  font-size: 11px;
+}
+
+.order-confirmation-frame .oc-label-new {
+  display: inline-block;
+  font-size: 9px;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: #2e7d32;
+  margin-bottom: 4px;
+}
+
+  </style>
+</head>
+<body class="mockup-review">
+
+<div id="tooltip" class="tooltip" style="background-color:#FFFFFF;padding:5px;border:1px solid #63b770;position:absolute;width:auto;height:auto;z-index:1010;visibility:hidden;left:0;top:0;"></div>
+
+<div class="review-bar">
+  <label>UI variant</label>
+  <div class="variant-tabs" id="variant-tabs">
+    <button type="button" class="variant-tab active" data-id="1" onclick="showVariant(1)">1 · Footnotes</button>
+    <button type="button" class="variant-tab" data-id="2" onclick="showVariant(2)">2 · Tooltips</button>
+    <button type="button" class="variant-tab" data-id="3" onclick="showVariant(3)">3 · Status column</button>
+    <button type="button" class="variant-tab" data-id="4" onclick="showVariant(4)">4 · Row banner</button>
+    <button type="button" class="variant-tab" data-id="5" onclick="showVariant(5)">5 · Expandable help</button>
+    <button type="button" class="variant-tab" data-id="6" onclick="showVariant(6)">6 · Footnotes + parent</button>
+    <button type="button" class="variant-tab" data-id="7" onclick="showVariant(7)">7 · Bestellbestätigung</button>
+  </div>
+  <div class="review-meta" id="review-meta">Subtext under contract type with numbered footnotes below the table. No parent product named.</div>
+</div>
+
+<div id="variant-root">
+
+<div class="variant-panel" id="variant-1">
+  <div class="master_container mockup-frame">
+    <table class="fl_mainWrapper" cellspacing="0" cellpadding="0">
+      <tbody><tr>
+        <td id="mainMenu">
+          <div class="mainMenu">
+            <div class="fl_logo">
+              <a href="/"><img src="/gfx/faceLift/he_logo.png" alt="" title=""></a>
+            </div>
+            <div id="languageSelectorContainer" data-language="en">
+              <form method="GET">
+                <img style="vertical-align:middle;" src="/gfx/flags/flag_great_britain.png" title="English" alt="">
+                <select class="language_minimal" name="languageSelector">
+                  <option value="de">Deutsch</option>
+                  <option value="en" selected="selected">English</option>
+                </select>
+              </form>
+            </div>
+            <div class="menubuttons">
+              <div class="menubutton-l1"><a href="/">Home</a></div>
+              <div class="menubutton-l1-active"><a href="/administration/">Product Admin</a></div>
+              <div class="menubutton-l1"><a href="/kundenkonto/kontaktdaten/">Account</a></div>
+              <div class="menubutton-l1"><a href="/allgemeines/">Downloads &amp; Links</a></div>
+              <div class="menubutton-l1"><a href="/support/">Support</a></div>
+              <div class="menubutton-l1"><a href="https://www.hosteurope.de/faq/" target="_blank">FAQ</a></div>
+            </div>
+            <div id="fl_logout_btn">
+              <a href="/?logout=1"><i class="icons8-logout-rounded fl_logout_icon"></i>&nbsp;Log out</a>
+            </div>
+          </div>
+          <div class="fl_customerInfo textFit">
+            You're logged in:<br>
+            <b>Maria Schneider</b> - <br>m.schneider (417293)
+          </div>
+          <div class="fl_customerInfo">
+            served by:<br>
+            <b>server12.kis</b>
+          </div>
+        </td>
+        <td style="vertical-align:top">
+          <div id="contentcol">
+            <div id="breadcrumb">
+              <a class="headline" href="/administration/">Product Admin</a>&nbsp;-&nbsp;
+              <a class="headline" href="/administration/email/">Email</a>
+            </div>
+            <div class="clear"></div>
+            <div style="background-color:#fff;">
+              <a class="menubutton-l2 highlighted-menu-item" href="/administration/contract-overview/">
+                <i class="icons8-contract-overview menubutton-l2-icon"></i><br>Contract Overview
+              </a>
+              <a class="menubutton-l2" href="/administration/domainservices/">
+                <i class="icons8-domain menubutton-l2-icon"></i><br>Domainservices
+              </a>
+              <a class="menubutton-l2" href="/administration/cpanel/">
+                <i class="icons8-cpanel menubutton-l2-icon"></i><br>cPanel WebHosting
+              </a>
+              <a class="menubutton-l2" href="/administration/managed-wordpress/">
+                <i class="icons8-wordpress menubutton-l2-icon"></i><br>Managed Wordpress
+              </a>
+              <a class="menubutton-l2-active" href="/administration/email/">
+                <i class="icons8-email menubutton-l2-icon-active"></i><br>Email
+              </a>
+            </div>
+            <br style="clear:both">
+          </div>
+          <br>
+          <div id="contentcol" style="padding-top:10px;">
+            <div class="fl_welcome" style="padding-left:5px;">
+              <div id="professional_email-index">
+                
+    <table style="width: 100%">
+        <tbody><tr>
+            <td>
+                Here is an overview of your existing Professional Email and Microsoft 365 contracts. <br><br>
+                Besides that you can enter your personal E-Mail Administration:
+                <button class="myButton disabled" disabled="">
+                    <i class="icons8-right-2 kis-Link-Icon"></i>START NOW
+                </button>
+            </td>
+            <td align="right" width="25%" id="professional_email-search-box">
+                <form class="professional_email-search-form action-ajax-form" method="post" action="/administration/email/">
+                    <div class="input-wrapper">
+                        <select name="contract-type-filter">
+                            <option selected="" value="">All</option>
+                            <option value="global_m365">Microsoft 365</option>
+                            <option value="global_ox">Professional Email</option>
+                            <option value="global_titan">Professional Email powered by Titan</option>
+                        </select>
+                        <input class="fo contract-search-box" type="text" name="contract-search" placeholder="Product, ID or Email" value="" maxlength="90" size="18">
+                        <input type="hidden" name="action" value="filter-by-contract">
+                        <a class="professional_email-search-btn myButton professional_email action" href="#">
+                            <i class="icons8-search kis-Link-Icon"></i> search
+                        </a>
+                    </div>
+                </form>
+            </td>
+        </tr>
+    </tbody></table>
+                <div class="reloadable">
+                  <table class="content">
+                    <tbody>
+                    
+    <tr>
+        <td class="tdhead">contract ID</td>
+        <td class="tdhead">Contract type</td>
+        <td class="tdhead">package name</td>
+        <td class="tdhead">mail address</td>
+        <td class="tdhead" style="width:190px;">contract</td>
+    </tr>
+    <tr>
+      <td class="tdlinks1">14877201</td>
+      <td class="tdlinks1">Professional Email Pro Light<span class="bundled-sub">Free until 02.08.2027 — then €1.79/month (Term: 24 months)<sup>1</sup></span></td>
+      <td class="tdlinks1">my-domain.de</td>
+      <td class="tdlinks1">some-mail@my-domain.de</td>
+      <td class="tdlinks1"><a href="#" class="myButton professional_email action disabled">
+                <i class="icons8-right-2 kis-Link-Icon"></i> webmail login
+            </a><br><a href="#" class="myButton professional_email action disabled">
+                <i class="icons8-settings kis-Link-Icon"></i> configure
+            </a><br><a class="myButton professional_email action internal" data-contract-id="14877201" href="#"><i class="icons8-search kis-Link-Icon"></i> contract details</a><br><a class="myButton professional_email action internal" data-contract-id="14877201" href="#"><i class="icons8-edit kis-Link-Icon"></i> change package name</a><br><a class="myButton professional_email action internal" data-contract-id="14877201" href="#"><i class="icons8-cancel kis-Link-Icon"></i> cancel contract</a></td>
+    </tr>
+    <tr>
+      <td class="tdlinks0">14878280</td>
+      <td class="tdlinks0">Professional Email Pro Light<span class="bundled-sub">Will be cancelled on 28.07.2026 (Term: 24 months)<sup>‡</sup></span></td>
+      <td class="tdlinks0"></td>
+      <td class="tdlinks0"></td>
+      <td class="tdlinks0"><a href="#" class="myButton professional_email action disabled">
+                <i class="icons8-settings kis-Link-Icon"></i> configure
+            </a><br><a class="myButton professional_email action internal" data-contract-id="14878280" href="#"><i class="icons8-search kis-Link-Icon"></i> contract details</a><br><a class="myButton professional_email action internal" data-contract-id="14878280" href="#"><i class="icons8-edit kis-Link-Icon"></i> change package name</a><br><a class="myButton professional_email action internal" data-contract-id="14878280" href="#"><i class="icons8-cancel kis-Link-Icon"></i> cancel contract</a></td>
+    </tr>
+    <tr>
+      <td class="tdlinks1">14891042</td>
+      <td class="tdlinks1">Professional Email Pro Light<span class="bundled-sub">Free until 15.03.2026 — then €1.99/month (Term: 1 year)<sup>2</sup></span></td>
+      <td class="tdlinks1">shop-example.de</td>
+      <td class="tdlinks1">info@shop-example.de</td>
+      <td class="tdlinks1"><a href="#" class="myButton professional_email action disabled">
+                <i class="icons8-right-2 kis-Link-Icon"></i> webmail login
+            </a><br><a href="#" class="myButton professional_email action disabled">
+                <i class="icons8-settings kis-Link-Icon"></i> configure
+            </a><br><a class="myButton professional_email action internal" data-contract-id="14891042" href="#"><i class="icons8-search kis-Link-Icon"></i> contract details</a><br><a class="myButton professional_email action internal" data-contract-id="14891042" href="#"><i class="icons8-edit kis-Link-Icon"></i> change package name</a><br><a class="myButton professional_email action internal" data-contract-id="14891042" href="#"><i class="icons8-cancel kis-Link-Icon"></i> cancel contract</a></td>
+    </tr>
+    <tr>
+      <td class="tdlinks0">14892011</td>
+      <td class="tdlinks0">Professional Email Pro Light<span class="bundled-sub">Will be cancelled on 01.02.2026 (Term: 1 year)<sup>‡</sup></span></td>
+      <td class="tdlinks0"></td>
+      <td class="tdlinks0"></td>
+      <td class="tdlinks0"><a href="#" class="myButton professional_email action disabled">
+                <i class="icons8-settings kis-Link-Icon"></i> configure
+            </a><br><a class="myButton professional_email action internal" data-contract-id="14892011" href="#"><i class="icons8-search kis-Link-Icon"></i> contract details</a><br><a class="myButton professional_email action internal" data-contract-id="14892011" href="#"><i class="icons8-edit kis-Link-Icon"></i> change package name</a><br><a class="myButton professional_email action internal" data-contract-id="14892011" href="#"><i class="icons8-cancel kis-Link-Icon"></i> cancel contract</a></td>
+    </tr>
+    <tr>
+      <td class="tdlinks1">14893088</td>
+      <td class="tdlinks1">Professional Email Pro Light<span class="bundled-sub">Free until 15.07.2025 — then €2.49/month (Term: 1 month)<sup>3</sup></span></td>
+      <td class="tdlinks1">trial-site.com</td>
+      <td class="tdlinks1">hello@trial-site.com</td>
+      <td class="tdlinks1"><a href="#" class="myButton professional_email action disabled">
+                <i class="icons8-right-2 kis-Link-Icon"></i> webmail login
+            </a><br><a href="#" class="myButton professional_email action disabled">
+                <i class="icons8-settings kis-Link-Icon"></i> configure
+            </a><br><a class="myButton professional_email action internal" data-contract-id="14893088" href="#"><i class="icons8-search kis-Link-Icon"></i> contract details</a><br><a class="myButton professional_email action internal" data-contract-id="14893088" href="#"><i class="icons8-edit kis-Link-Icon"></i> change package name</a><br><a class="myButton professional_email action internal" data-contract-id="14893088" href="#"><i class="icons8-cancel kis-Link-Icon"></i> cancel contract</a></td>
+    </tr>
+    <tr>
+      <td class="tdlinks0">14893102</td>
+      <td class="tdlinks0">Professional Email Pro Light<span class="bundled-sub">Will be cancelled on 31.07.2025 (Term: 1 month)<sup>‡</sup></span></td>
+      <td class="tdlinks0"></td>
+      <td class="tdlinks0"></td>
+      <td class="tdlinks0"><a href="#" class="myButton professional_email action disabled">
+                <i class="icons8-settings kis-Link-Icon"></i> configure
+            </a><br><a class="myButton professional_email action internal" data-contract-id="14893102" href="#"><i class="icons8-search kis-Link-Icon"></i> contract details</a><br><a class="myButton professional_email action internal" data-contract-id="14893102" href="#"><i class="icons8-edit kis-Link-Icon"></i> change package name</a><br><a class="myButton professional_email action internal" data-contract-id="14893102" href="#"><i class="icons8-cancel kis-Link-Icon"></i> cancel contract</a></td>
+    </tr>
+    <tr>
+      <td class="tdlinks0">13952505</td>
+      <td class="tdlinks0">Professional Email Individual</td>
+      <td class="tdlinks0">business-site</td>
+      <td class="tdlinks0">info@business-site.com</td>
+      <td class="tdlinks0"><a href="#" class="myButton professional_email action disabled">
+                <i class="icons8-right-2 kis-Link-Icon"></i> webmail login
+            </a><br><a href="#" class="myButton professional_email action disabled">
+                <i class="icons8-settings kis-Link-Icon"></i> configure
+            </a><br><a class="myButton professional_email action internal" data-contract-id="13952505" href="#"><i class="icons8-search kis-Link-Icon"></i> contract details</a><br><a class="myButton professional_email action internal" data-contract-id="13952505" href="#"><i class="icons8-edit kis-Link-Icon"></i> change package name</a><br><a class="myButton professional_email action internal" data-contract-id="13952505" href="#"><i class="icons8-shopping-cart kis-Link-Icon"></i> upgrade contract</a><br><a class="myButton professional_email action internal" data-contract-id="13952505" href="#"><i class="icons8-cancel kis-Link-Icon"></i> cancel contract</a></td>
+    </tr>
+                    
+        <tfoot>
+        <tr>
+            <td colspan="5" align="center">7 contracts found</td>
+        </tr>
+        <tr>
+            <td colspan="5" align="center">1 of 1</td>
+        </tr>
+        </tfoot>
+                    </tbody>
+                  </table>
+                  
+    <div class="footnote-block">
+      <p>Bundled email is free for the duration of the parent contract term if a mailbox is created (activated).</p>
+      <p><sup>‡</sup> If no mailbox is created, the product is automatically cancelled at the end of the free period.</p>
+      <p><strong>Renewal price by contract term:</strong><br><sup>1</sup> Term: 24 months → €1.79/month after free period<br><sup>2</sup> Term: 1 year → €1.99/month after free period<br><sup>3</sup> Term: 1 month → €2.49/month after free period</p>
+      <p>For contract terms longer than 12 months, the bundled price applies from month 13 until the end of the contract term, then auto-renews unless cancelled.</p>
+      <p>Email can be cancelled independently of other bundled products.</p>
+      
+    </div>
+                </div>
+                
+    <div style="padding:15px;margin-top:8px;" id="headnav_wrapper">
+        <span style="display:inline-block;width:100%;" class="kis-Table-Title">
+            Product Ordering<i class="icons8-shopping-cart kis-Table-Title-Icon"></i>
+        </span><br>
+        Order here easily <span style="white-space: nowrap;"><i class="icons8-up-right kis-Link-Icon"></i><a href="https://www.hosteurope.de/en/E-Mail-Hosting-2/" target="_blank">more Professional Email (Individual or Team) Packages</a></span><br>
+        Order here easily <span style="white-space: nowrap;"><i class="icons8-up-right kis-Link-Icon"></i><a href="https://www.hosteurope.de/en/E-Mail-Hosting/" target="_blank">more Professional Email (powered by Titan) Packages</a></span><br>
+        Order here easily <span style="white-space: nowrap;"><i class="icons8-up-right kis-Link-Icon"></i><a href="https://www.hosteurope.de/Office-365/" target="_blank">more Microsoft 365 licences</a></span>
+    </div>
+              </div>
+            </div>
+          </div>
+        </td>
+      </tr>
+    </tbody></table>
+  </div>
+</div>
+
+<div class="variant-panel hidden" id="variant-2">
+  <div class="master_container mockup-frame">
+    <table class="fl_mainWrapper" cellspacing="0" cellpadding="0">
+      <tbody><tr>
+        <td id="mainMenu">
+          <div class="mainMenu">
+            <div class="fl_logo">
+              <a href="/"><img src="/gfx/faceLift/he_logo.png" alt="" title=""></a>
+            </div>
+            <div id="languageSelectorContainer" data-language="en">
+              <form method="GET">
+                <img style="vertical-align:middle;" src="/gfx/flags/flag_great_britain.png" title="English" alt="">
+                <select class="language_minimal" name="languageSelector">
+                  <option value="de">Deutsch</option>
+                  <option value="en" selected="selected">English</option>
+                </select>
+              </form>
+            </div>
+            <div class="menubuttons">
+              <div class="menubutton-l1"><a href="/">Home</a></div>
+              <div class="menubutton-l1-active"><a href="/administration/">Product Admin</a></div>
+              <div class="menubutton-l1"><a href="/kundenkonto/kontaktdaten/">Account</a></div>
+              <div class="menubutton-l1"><a href="/allgemeines/">Downloads &amp; Links</a></div>
+              <div class="menubutton-l1"><a href="/support/">Support</a></div>
+              <div class="menubutton-l1"><a href="https://www.hosteurope.de/faq/" target="_blank">FAQ</a></div>
+            </div>
+            <div id="fl_logout_btn">
+              <a href="/?logout=1"><i class="icons8-logout-rounded fl_logout_icon"></i>&nbsp;Log out</a>
+            </div>
+          </div>
+          <div class="fl_customerInfo textFit">
+            You're logged in:<br>
+            <b>Maria Schneider</b> - <br>m.schneider (417293)
+          </div>
+          <div class="fl_customerInfo">
+            served by:<br>
+            <b>server12.kis</b>
+          </div>
+        </td>
+        <td style="vertical-align:top">
+          <div id="contentcol">
+            <div id="breadcrumb">
+              <a class="headline" href="/administration/">Product Admin</a>&nbsp;-&nbsp;
+              <a class="headline" href="/administration/email/">Email</a>
+            </div>
+            <div class="clear"></div>
+            <div style="background-color:#fff;">
+              <a class="menubutton-l2 highlighted-menu-item" href="/administration/contract-overview/">
+                <i class="icons8-contract-overview menubutton-l2-icon"></i><br>Contract Overview
+              </a>
+              <a class="menubutton-l2" href="/administration/domainservices/">
+                <i class="icons8-domain menubutton-l2-icon"></i><br>Domainservices
+              </a>
+              <a class="menubutton-l2" href="/administration/cpanel/">
+                <i class="icons8-cpanel menubutton-l2-icon"></i><br>cPanel WebHosting
+              </a>
+              <a class="menubutton-l2" href="/administration/managed-wordpress/">
+                <i class="icons8-wordpress menubutton-l2-icon"></i><br>Managed Wordpress
+              </a>
+              <a class="menubutton-l2-active" href="/administration/email/">
+                <i class="icons8-email menubutton-l2-icon-active"></i><br>Email
+              </a>
+            </div>
+            <br style="clear:both">
+          </div>
+          <br>
+          <div id="contentcol" style="padding-top:10px;">
+            <div class="fl_welcome" style="padding-left:5px;">
+              <div id="professional_email-index">
+                
+    <table style="width: 100%">
+        <tbody><tr>
+            <td>
+                Here is an overview of your existing Professional Email and Microsoft 365 contracts. <br><br>
+                Besides that you can enter your personal E-Mail Administration:
+                <button class="myButton disabled" disabled="">
+                    <i class="icons8-right-2 kis-Link-Icon"></i>START NOW
+                </button>
+            </td>
+            <td align="right" width="25%" id="professional_email-search-box">
+                <form class="professional_email-search-form action-ajax-form" method="post" action="/administration/email/">
+                    <div class="input-wrapper">
+                        <select name="contract-type-filter">
+                            <option selected="" value="">All</option>
+                            <option value="global_m365">Microsoft 365</option>
+                            <option value="global_ox">Professional Email</option>
+                            <option value="global_titan">Professional Email powered by Titan</option>
+                        </select>
+                        <input class="fo contract-search-box" type="text" name="contract-search" placeholder="Product, ID or Email" value="" maxlength="90" size="18">
+                        <input type="hidden" name="action" value="filter-by-contract">
+                        <a class="professional_email-search-btn myButton professional_email action" href="#">
+                            <i class="icons8-search kis-Link-Icon"></i> search
+                        </a>
+                    </div>
+                </form>
+            </td>
+        </tr>
+    </tbody></table>
+                <div class="reloadable">
+                  <table class="content">
+                    <tbody>
+                    
+    <tr>
+        <td class="tdhead">contract ID</td>
+        <td class="tdhead">Contract type</td>
+        <td class="tdhead">package name</td>
+        <td class="tdhead">mail address</td>
+        <td class="tdhead" style="width:190px;">contract</td>
+    </tr>
+    <tr>
+      <td class="tdlinks1">14877201<span class="info-tip" tabindex="0">i<span class="tip-content">Bundled email — free until 02.08.2027 (Term: 24 months). After the free period: €1.79/month unless cancelled.</span></span></td>
+      <td class="tdlinks1">Professional Email Pro Light</td>
+      <td class="tdlinks1">my-domain.de</td>
+      <td class="tdlinks1">some-mail@my-domain.de</td>
+      <td class="tdlinks1"><a href="#" class="myButton professional_email action disabled">
+                <i class="icons8-right-2 kis-Link-Icon"></i> webmail login
+            </a><br><a href="#" class="myButton professional_email action disabled">
+                <i class="icons8-settings kis-Link-Icon"></i> configure
+            </a><br><a class="myButton professional_email action internal" data-contract-id="14877201" href="#"><i class="icons8-search kis-Link-Icon"></i> contract details</a><br><a class="myButton professional_email action internal" data-contract-id="14877201" href="#"><i class="icons8-edit kis-Link-Icon"></i> change package name</a><br><a class="myButton professional_email action internal" data-contract-id="14877201" href="#"><i class="icons8-cancel kis-Link-Icon"></i> cancel contract</a></td>
+    </tr>
+    <tr>
+      <td class="tdlinks0">14878280<span class="info-tip" tabindex="0">i<span class="tip-content">No mailbox created — this bundled email will be automatically cancelled on 28.07.2026 when the free period ends.</span></span></td>
+      <td class="tdlinks0">Professional Email Pro Light</td>
+      <td class="tdlinks0"></td>
+      <td class="tdlinks0"></td>
+      <td class="tdlinks0"><a href="#" class="myButton professional_email action disabled">
+                <i class="icons8-settings kis-Link-Icon"></i> configure
+            </a><br><a class="myButton professional_email action internal" data-contract-id="14878280" href="#"><i class="icons8-search kis-Link-Icon"></i> contract details</a><br><a class="myButton professional_email action internal" data-contract-id="14878280" href="#"><i class="icons8-edit kis-Link-Icon"></i> change package name</a><br><a class="myButton professional_email action internal" data-contract-id="14878280" href="#"><i class="icons8-cancel kis-Link-Icon"></i> cancel contract</a></td>
+    </tr>
+    <tr>
+      <td class="tdlinks1">14891042<span class="info-tip" tabindex="0">i<span class="tip-content">Bundled email — free until 15.03.2026 (Term: 1 year). After the free period: €1.99/month unless cancelled.</span></span></td>
+      <td class="tdlinks1">Professional Email Pro Light</td>
+      <td class="tdlinks1">shop-example.de</td>
+      <td class="tdlinks1">info@shop-example.de</td>
+      <td class="tdlinks1"><a href="#" class="myButton professional_email action disabled">
+                <i class="icons8-right-2 kis-Link-Icon"></i> webmail login
+            </a><br><a href="#" class="myButton professional_email action disabled">
+                <i class="icons8-settings kis-Link-Icon"></i> configure
+            </a><br><a class="myButton professional_email action internal" data-contract-id="14891042" href="#"><i class="icons8-search kis-Link-Icon"></i> contract details</a><br><a class="myButton professional_email action internal" data-contract-id="14891042" href="#"><i class="icons8-edit kis-Link-Icon"></i> change package name</a><br><a class="myButton professional_email action internal" data-contract-id="14891042" href="#"><i class="icons8-cancel kis-Link-Icon"></i> cancel contract</a></td>
+    </tr>
+    <tr>
+      <td class="tdlinks0">14892011<span class="info-tip" tabindex="0">i<span class="tip-content">No mailbox created — this bundled email will be automatically cancelled on 01.02.2026 when the free period ends.</span></span></td>
+      <td class="tdlinks0">Professional Email Pro Light</td>
+      <td class="tdlinks0"></td>
+      <td class="tdlinks0"></td>
+      <td class="tdlinks0"><a href="#" class="myButton professional_email action disabled">
+                <i class="icons8-settings kis-Link-Icon"></i> configure
+            </a><br><a class="myButton professional_email action internal" data-contract-id="14892011" href="#"><i class="icons8-search kis-Link-Icon"></i> contract details</a><br><a class="myButton professional_email action internal" data-contract-id="14892011" href="#"><i class="icons8-edit kis-Link-Icon"></i> change package name</a><br><a class="myButton professional_email action internal" data-contract-id="14892011" href="#"><i class="icons8-cancel kis-Link-Icon"></i> cancel contract</a></td>
+    </tr>
+    <tr>
+      <td class="tdlinks1">14893088<span class="info-tip" tabindex="0">i<span class="tip-content">Bundled email — free until 15.07.2025 (Term: 1 month). After the free period: €2.49/month unless cancelled.</span></span></td>
+      <td class="tdlinks1">Professional Email Pro Light</td>
+      <td class="tdlinks1">trial-site.com</td>
+      <td class="tdlinks1">hello@trial-site.com</td>
+      <td class="tdlinks1"><a href="#" class="myButton professional_email action disabled">
+                <i class="icons8-right-2 kis-Link-Icon"></i> webmail login
+            </a><br><a href="#" class="myButton professional_email action disabled">
+                <i class="icons8-settings kis-Link-Icon"></i> configure
+            </a><br><a class="myButton professional_email action internal" data-contract-id="14893088" href="#"><i class="icons8-search kis-Link-Icon"></i> contract details</a><br><a class="myButton professional_email action internal" data-contract-id="14893088" href="#"><i class="icons8-edit kis-Link-Icon"></i> change package name</a><br><a class="myButton professional_email action internal" data-contract-id="14893088" href="#"><i class="icons8-cancel kis-Link-Icon"></i> cancel contract</a></td>
+    </tr>
+    <tr>
+      <td class="tdlinks0">14893102<span class="info-tip" tabindex="0">i<span class="tip-content">No mailbox created — this bundled email will be automatically cancelled on 31.07.2025 when the free period ends.</span></span></td>
+      <td class="tdlinks0">Professional Email Pro Light</td>
+      <td class="tdlinks0"></td>
+      <td class="tdlinks0"></td>
+      <td class="tdlinks0"><a href="#" class="myButton professional_email action disabled">
+                <i class="icons8-settings kis-Link-Icon"></i> configure
+            </a><br><a class="myButton professional_email action internal" data-contract-id="14893102" href="#"><i class="icons8-search kis-Link-Icon"></i> contract details</a><br><a class="myButton professional_email action internal" data-contract-id="14893102" href="#"><i class="icons8-edit kis-Link-Icon"></i> change package name</a><br><a class="myButton professional_email action internal" data-contract-id="14893102" href="#"><i class="icons8-cancel kis-Link-Icon"></i> cancel contract</a></td>
+    </tr>
+    <tr>
+      <td class="tdlinks0">13952505</td>
+      <td class="tdlinks0">Professional Email Individual</td>
+      <td class="tdlinks0">business-site</td>
+      <td class="tdlinks0">info@business-site.com</td>
+      <td class="tdlinks0"><a href="#" class="myButton professional_email action disabled">
+                <i class="icons8-right-2 kis-Link-Icon"></i> webmail login
+            </a><br><a href="#" class="myButton professional_email action disabled">
+                <i class="icons8-settings kis-Link-Icon"></i> configure
+            </a><br><a class="myButton professional_email action internal" data-contract-id="13952505" href="#"><i class="icons8-search kis-Link-Icon"></i> contract details</a><br><a class="myButton professional_email action internal" data-contract-id="13952505" href="#"><i class="icons8-edit kis-Link-Icon"></i> change package name</a><br><a class="myButton professional_email action internal" data-contract-id="13952505" href="#"><i class="icons8-shopping-cart kis-Link-Icon"></i> upgrade contract</a><br><a class="myButton professional_email action internal" data-contract-id="13952505" href="#"><i class="icons8-cancel kis-Link-Icon"></i> cancel contract</a></td>
+    </tr>
+                    
+        <tfoot>
+        <tr>
+            <td colspan="5" align="center">7 contracts found</td>
+        </tr>
+        <tr>
+            <td colspan="5" align="center">1 of 1</td>
+        </tr>
+        </tfoot>
+                    </tbody>
+                  </table>
+                  
+                </div>
+                
+    <div style="padding:15px;margin-top:8px;" id="headnav_wrapper">
+        <span style="display:inline-block;width:100%;" class="kis-Table-Title">
+            Product Ordering<i class="icons8-shopping-cart kis-Table-Title-Icon"></i>
+        </span><br>
+        Order here easily <span style="white-space: nowrap;"><i class="icons8-up-right kis-Link-Icon"></i><a href="https://www.hosteurope.de/en/E-Mail-Hosting-2/" target="_blank">more Professional Email (Individual or Team) Packages</a></span><br>
+        Order here easily <span style="white-space: nowrap;"><i class="icons8-up-right kis-Link-Icon"></i><a href="https://www.hosteurope.de/en/E-Mail-Hosting/" target="_blank">more Professional Email (powered by Titan) Packages</a></span><br>
+        Order here easily <span style="white-space: nowrap;"><i class="icons8-up-right kis-Link-Icon"></i><a href="https://www.hosteurope.de/Office-365/" target="_blank">more Microsoft 365 licences</a></span>
+    </div>
+              </div>
+            </div>
+          </div>
+        </td>
+      </tr>
+    </tbody></table>
+  </div>
+</div>
+
+<div class="variant-panel hidden" id="variant-3">
+  <div class="master_container mockup-frame">
+    <table class="fl_mainWrapper" cellspacing="0" cellpadding="0">
+      <tbody><tr>
+        <td id="mainMenu">
+          <div class="mainMenu">
+            <div class="fl_logo">
+              <a href="/"><img src="/gfx/faceLift/he_logo.png" alt="" title=""></a>
+            </div>
+            <div id="languageSelectorContainer" data-language="en">
+              <form method="GET">
+                <img style="vertical-align:middle;" src="/gfx/flags/flag_great_britain.png" title="English" alt="">
+                <select class="language_minimal" name="languageSelector">
+                  <option value="de">Deutsch</option>
+                  <option value="en" selected="selected">English</option>
+                </select>
+              </form>
+            </div>
+            <div class="menubuttons">
+              <div class="menubutton-l1"><a href="/">Home</a></div>
+              <div class="menubutton-l1-active"><a href="/administration/">Product Admin</a></div>
+              <div class="menubutton-l1"><a href="/kundenkonto/kontaktdaten/">Account</a></div>
+              <div class="menubutton-l1"><a href="/allgemeines/">Downloads &amp; Links</a></div>
+              <div class="menubutton-l1"><a href="/support/">Support</a></div>
+              <div class="menubutton-l1"><a href="https://www.hosteurope.de/faq/" target="_blank">FAQ</a></div>
+            </div>
+            <div id="fl_logout_btn">
+              <a href="/?logout=1"><i class="icons8-logout-rounded fl_logout_icon"></i>&nbsp;Log out</a>
+            </div>
+          </div>
+          <div class="fl_customerInfo textFit">
+            You're logged in:<br>
+            <b>Maria Schneider</b> - <br>m.schneider (417293)
+          </div>
+          <div class="fl_customerInfo">
+            served by:<br>
+            <b>server12.kis</b>
+          </div>
+        </td>
+        <td style="vertical-align:top">
+          <div id="contentcol">
+            <div id="breadcrumb">
+              <a class="headline" href="/administration/">Product Admin</a>&nbsp;-&nbsp;
+              <a class="headline" href="/administration/email/">Email</a>
+            </div>
+            <div class="clear"></div>
+            <div style="background-color:#fff;">
+              <a class="menubutton-l2 highlighted-menu-item" href="/administration/contract-overview/">
+                <i class="icons8-contract-overview menubutton-l2-icon"></i><br>Contract Overview
+              </a>
+              <a class="menubutton-l2" href="/administration/domainservices/">
+                <i class="icons8-domain menubutton-l2-icon"></i><br>Domainservices
+              </a>
+              <a class="menubutton-l2" href="/administration/cpanel/">
+                <i class="icons8-cpanel menubutton-l2-icon"></i><br>cPanel WebHosting
+              </a>
+              <a class="menubutton-l2" href="/administration/managed-wordpress/">
+                <i class="icons8-wordpress menubutton-l2-icon"></i><br>Managed Wordpress
+              </a>
+              <a class="menubutton-l2-active" href="/administration/email/">
+                <i class="icons8-email menubutton-l2-icon-active"></i><br>Email
+              </a>
+            </div>
+            <br style="clear:both">
+          </div>
+          <br>
+          <div id="contentcol" style="padding-top:10px;">
+            <div class="fl_welcome" style="padding-left:5px;">
+              <div id="professional_email-index">
+                
+    <table style="width: 100%">
+        <tbody><tr>
+            <td>
+                Here is an overview of your existing Professional Email and Microsoft 365 contracts. <br><br>
+                Besides that you can enter your personal E-Mail Administration:
+                <button class="myButton disabled" disabled="">
+                    <i class="icons8-right-2 kis-Link-Icon"></i>START NOW
+                </button>
+            </td>
+            <td align="right" width="25%" id="professional_email-search-box">
+                <form class="professional_email-search-form action-ajax-form" method="post" action="/administration/email/">
+                    <div class="input-wrapper">
+                        <select name="contract-type-filter">
+                            <option selected="" value="">All</option>
+                            <option value="global_m365">Microsoft 365</option>
+                            <option value="global_ox">Professional Email</option>
+                            <option value="global_titan">Professional Email powered by Titan</option>
+                        </select>
+                        <input class="fo contract-search-box" type="text" name="contract-search" placeholder="Product, ID or Email" value="" maxlength="90" size="18">
+                        <input type="hidden" name="action" value="filter-by-contract">
+                        <a class="professional_email-search-btn myButton professional_email action" href="#">
+                            <i class="icons8-search kis-Link-Icon"></i> search
+                        </a>
+                    </div>
+                </form>
+            </td>
+        </tr>
+    </tbody></table>
+                <div class="reloadable">
+                  <table class="content">
+                    <tbody>
+                    
+    <tr>
+        <td class="tdhead">contract ID</td>
+        <td class="tdhead">Contract type</td>
+        <td class="tdhead">package name</td>
+        <td class="tdhead">mail address</td>
+        <td class="tdhead">Bundled status</td>
+        <td class="tdhead" style="width:190px;">contract</td>
+    </tr>
+    <tr>
+      <td class="tdlinks1">14877201</td>
+      <td class="tdlinks1">Professional Email Pro Light</td>
+      <td class="tdlinks1">my-domain.de</td>
+      <td class="tdlinks1">some-mail@my-domain.de</td>
+      <td class="tdlinks1"><span class="status-badge free">Free (bundled)<span class="status-detail">until 02.08.2027 · €1.79/mo · Term: 24 months</span></span></td>
+      <td class="tdlinks1"><a href="#" class="myButton professional_email action disabled">
+                <i class="icons8-right-2 kis-Link-Icon"></i> webmail login
+            </a><br><a href="#" class="myButton professional_email action disabled">
+                <i class="icons8-settings kis-Link-Icon"></i> configure
+            </a><br><a class="myButton professional_email action internal" data-contract-id="14877201" href="#"><i class="icons8-search kis-Link-Icon"></i> contract details</a><br><a class="myButton professional_email action internal" data-contract-id="14877201" href="#"><i class="icons8-edit kis-Link-Icon"></i> change package name</a><br><a class="myButton professional_email action internal" data-contract-id="14877201" href="#"><i class="icons8-cancel kis-Link-Icon"></i> cancel contract</a></td>
+    </tr>
+    <tr>
+      <td class="tdlinks0">14878280</td>
+      <td class="tdlinks0">Professional Email Pro Light</td>
+      <td class="tdlinks0"></td>
+      <td class="tdlinks0"></td>
+      <td class="tdlinks0"><span class="status-badge cancel">Auto-cancel<span class="status-detail">will be cancelled on 28.07.2026 · Term: 24 months</span></span></td>
+      <td class="tdlinks0"><a href="#" class="myButton professional_email action disabled">
+                <i class="icons8-settings kis-Link-Icon"></i> configure
+            </a><br><a class="myButton professional_email action internal" data-contract-id="14878280" href="#"><i class="icons8-search kis-Link-Icon"></i> contract details</a><br><a class="myButton professional_email action internal" data-contract-id="14878280" href="#"><i class="icons8-edit kis-Link-Icon"></i> change package name</a><br><a class="myButton professional_email action internal" data-contract-id="14878280" href="#"><i class="icons8-cancel kis-Link-Icon"></i> cancel contract</a></td>
+    </tr>
+    <tr>
+      <td class="tdlinks1">14891042</td>
+      <td class="tdlinks1">Professional Email Pro Light</td>
+      <td class="tdlinks1">shop-example.de</td>
+      <td class="tdlinks1">info@shop-example.de</td>
+      <td class="tdlinks1"><span class="status-badge free">Free (bundled)<span class="status-detail">until 15.03.2026 · €1.99/mo · Term: 1 year</span></span></td>
+      <td class="tdlinks1"><a href="#" class="myButton professional_email action disabled">
+                <i class="icons8-right-2 kis-Link-Icon"></i> webmail login
+            </a><br><a href="#" class="myButton professional_email action disabled">
+                <i class="icons8-settings kis-Link-Icon"></i> configure
+            </a><br><a class="myButton professional_email action internal" data-contract-id="14891042" href="#"><i class="icons8-search kis-Link-Icon"></i> contract details</a><br><a class="myButton professional_email action internal" data-contract-id="14891042" href="#"><i class="icons8-edit kis-Link-Icon"></i> change package name</a><br><a class="myButton professional_email action internal" data-contract-id="14891042" href="#"><i class="icons8-cancel kis-Link-Icon"></i> cancel contract</a></td>
+    </tr>
+    <tr>
+      <td class="tdlinks0">14892011</td>
+      <td class="tdlinks0">Professional Email Pro Light</td>
+      <td class="tdlinks0"></td>
+      <td class="tdlinks0"></td>
+      <td class="tdlinks0"><span class="status-badge cancel">Auto-cancel<span class="status-detail">will be cancelled on 01.02.2026 · Term: 1 year</span></span></td>
+      <td class="tdlinks0"><a href="#" class="myButton professional_email action disabled">
+                <i class="icons8-settings kis-Link-Icon"></i> configure
+            </a><br><a class="myButton professional_email action internal" data-contract-id="14892011" href="#"><i class="icons8-search kis-Link-Icon"></i> contract details</a><br><a class="myButton professional_email action internal" data-contract-id="14892011" href="#"><i class="icons8-edit kis-Link-Icon"></i> change package name</a><br><a class="myButton professional_email action internal" data-contract-id="14892011" href="#"><i class="icons8-cancel kis-Link-Icon"></i> cancel contract</a></td>
+    </tr>
+    <tr>
+      <td class="tdlinks1">14893088</td>
+      <td class="tdlinks1">Professional Email Pro Light</td>
+      <td class="tdlinks1">trial-site.com</td>
+      <td class="tdlinks1">hello@trial-site.com</td>
+      <td class="tdlinks1"><span class="status-badge free">Free (bundled)<span class="status-detail">until 15.07.2025 · €2.49/mo · Term: 1 month</span></span></td>
+      <td class="tdlinks1"><a href="#" class="myButton professional_email action disabled">
+                <i class="icons8-right-2 kis-Link-Icon"></i> webmail login
+            </a><br><a href="#" class="myButton professional_email action disabled">
+                <i class="icons8-settings kis-Link-Icon"></i> configure
+            </a><br><a class="myButton professional_email action internal" data-contract-id="14893088" href="#"><i class="icons8-search kis-Link-Icon"></i> contract details</a><br><a class="myButton professional_email action internal" data-contract-id="14893088" href="#"><i class="icons8-edit kis-Link-Icon"></i> change package name</a><br><a class="myButton professional_email action internal" data-contract-id="14893088" href="#"><i class="icons8-cancel kis-Link-Icon"></i> cancel contract</a></td>
+    </tr>
+    <tr>
+      <td class="tdlinks0">14893102</td>
+      <td class="tdlinks0">Professional Email Pro Light</td>
+      <td class="tdlinks0"></td>
+      <td class="tdlinks0"></td>
+      <td class="tdlinks0"><span class="status-badge cancel">Auto-cancel<span class="status-detail">will be cancelled on 31.07.2025 · Term: 1 month</span></span></td>
+      <td class="tdlinks0"><a href="#" class="myButton professional_email action disabled">
+                <i class="icons8-settings kis-Link-Icon"></i> configure
+            </a><br><a class="myButton professional_email action internal" data-contract-id="14893102" href="#"><i class="icons8-search kis-Link-Icon"></i> contract details</a><br><a class="myButton professional_email action internal" data-contract-id="14893102" href="#"><i class="icons8-edit kis-Link-Icon"></i> change package name</a><br><a class="myButton professional_email action internal" data-contract-id="14893102" href="#"><i class="icons8-cancel kis-Link-Icon"></i> cancel contract</a></td>
+    </tr>
+    <tr>
+      <td class="tdlinks0">13952505</td>
+      <td class="tdlinks0">Professional Email Individual</td>
+      <td class="tdlinks0">business-site</td>
+      <td class="tdlinks0">info@business-site.com</td>
+      <td class="tdlinks0"><span class="status-badge paid">Paid contract</span></td>
+      <td class="tdlinks0"><a href="#" class="myButton professional_email action disabled">
+                <i class="icons8-right-2 kis-Link-Icon"></i> webmail login
+            </a><br><a href="#" class="myButton professional_email action disabled">
+                <i class="icons8-settings kis-Link-Icon"></i> configure
+            </a><br><a class="myButton professional_email action internal" data-contract-id="13952505" href="#"><i class="icons8-search kis-Link-Icon"></i> contract details</a><br><a class="myButton professional_email action internal" data-contract-id="13952505" href="#"><i class="icons8-edit kis-Link-Icon"></i> change package name</a><br><a class="myButton professional_email action internal" data-contract-id="13952505" href="#"><i class="icons8-shopping-cart kis-Link-Icon"></i> upgrade contract</a><br><a class="myButton professional_email action internal" data-contract-id="13952505" href="#"><i class="icons8-cancel kis-Link-Icon"></i> cancel contract</a></td>
+    </tr>
+                    
+        <tfoot>
+        <tr>
+            <td colspan="6" align="center">7 contracts found</td>
+        </tr>
+        <tr>
+            <td colspan="6" align="center">1 of 1</td>
+        </tr>
+        </tfoot>
+                    </tbody>
+                  </table>
+                  
+                </div>
+                
+    <div style="padding:15px;margin-top:8px;" id="headnav_wrapper">
+        <span style="display:inline-block;width:100%;" class="kis-Table-Title">
+            Product Ordering<i class="icons8-shopping-cart kis-Table-Title-Icon"></i>
+        </span><br>
+        Order here easily <span style="white-space: nowrap;"><i class="icons8-up-right kis-Link-Icon"></i><a href="https://www.hosteurope.de/en/E-Mail-Hosting-2/" target="_blank">more Professional Email (Individual or Team) Packages</a></span><br>
+        Order here easily <span style="white-space: nowrap;"><i class="icons8-up-right kis-Link-Icon"></i><a href="https://www.hosteurope.de/en/E-Mail-Hosting/" target="_blank">more Professional Email (powered by Titan) Packages</a></span><br>
+        Order here easily <span style="white-space: nowrap;"><i class="icons8-up-right kis-Link-Icon"></i><a href="https://www.hosteurope.de/Office-365/" target="_blank">more Microsoft 365 licences</a></span>
+    </div>
+              </div>
+            </div>
+          </div>
+        </td>
+      </tr>
+    </tbody></table>
+  </div>
+</div>
+
+<div class="variant-panel hidden" id="variant-4">
+  <div class="master_container mockup-frame">
+    <table class="fl_mainWrapper" cellspacing="0" cellpadding="0">
+      <tbody><tr>
+        <td id="mainMenu">
+          <div class="mainMenu">
+            <div class="fl_logo">
+              <a href="/"><img src="/gfx/faceLift/he_logo.png" alt="" title=""></a>
+            </div>
+            <div id="languageSelectorContainer" data-language="en">
+              <form method="GET">
+                <img style="vertical-align:middle;" src="/gfx/flags/flag_great_britain.png" title="English" alt="">
+                <select class="language_minimal" name="languageSelector">
+                  <option value="de">Deutsch</option>
+                  <option value="en" selected="selected">English</option>
+                </select>
+              </form>
+            </div>
+            <div class="menubuttons">
+              <div class="menubutton-l1"><a href="/">Home</a></div>
+              <div class="menubutton-l1-active"><a href="/administration/">Product Admin</a></div>
+              <div class="menubutton-l1"><a href="/kundenkonto/kontaktdaten/">Account</a></div>
+              <div class="menubutton-l1"><a href="/allgemeines/">Downloads &amp; Links</a></div>
+              <div class="menubutton-l1"><a href="/support/">Support</a></div>
+              <div class="menubutton-l1"><a href="https://www.hosteurope.de/faq/" target="_blank">FAQ</a></div>
+            </div>
+            <div id="fl_logout_btn">
+              <a href="/?logout=1"><i class="icons8-logout-rounded fl_logout_icon"></i>&nbsp;Log out</a>
+            </div>
+          </div>
+          <div class="fl_customerInfo textFit">
+            You're logged in:<br>
+            <b>Maria Schneider</b> - <br>m.schneider (417293)
+          </div>
+          <div class="fl_customerInfo">
+            served by:<br>
+            <b>server12.kis</b>
+          </div>
+        </td>
+        <td style="vertical-align:top">
+          <div id="contentcol">
+            <div id="breadcrumb">
+              <a class="headline" href="/administration/">Product Admin</a>&nbsp;-&nbsp;
+              <a class="headline" href="/administration/email/">Email</a>
+            </div>
+            <div class="clear"></div>
+            <div style="background-color:#fff;">
+              <a class="menubutton-l2 highlighted-menu-item" href="/administration/contract-overview/">
+                <i class="icons8-contract-overview menubutton-l2-icon"></i><br>Contract Overview
+              </a>
+              <a class="menubutton-l2" href="/administration/domainservices/">
+                <i class="icons8-domain menubutton-l2-icon"></i><br>Domainservices
+              </a>
+              <a class="menubutton-l2" href="/administration/cpanel/">
+                <i class="icons8-cpanel menubutton-l2-icon"></i><br>cPanel WebHosting
+              </a>
+              <a class="menubutton-l2" href="/administration/managed-wordpress/">
+                <i class="icons8-wordpress menubutton-l2-icon"></i><br>Managed Wordpress
+              </a>
+              <a class="menubutton-l2-active" href="/administration/email/">
+                <i class="icons8-email menubutton-l2-icon-active"></i><br>Email
+              </a>
+            </div>
+            <br style="clear:both">
+          </div>
+          <br>
+          <div id="contentcol" style="padding-top:10px;">
+            <div class="fl_welcome" style="padding-left:5px;">
+              <div id="professional_email-index">
+                
+    <table style="width: 100%">
+        <tbody><tr>
+            <td>
+                Here is an overview of your existing Professional Email and Microsoft 365 contracts. <br><br>
+                Besides that you can enter your personal E-Mail Administration:
+                <button class="myButton disabled" disabled="">
+                    <i class="icons8-right-2 kis-Link-Icon"></i>START NOW
+                </button>
+            </td>
+            <td align="right" width="25%" id="professional_email-search-box">
+                <form class="professional_email-search-form action-ajax-form" method="post" action="/administration/email/">
+                    <div class="input-wrapper">
+                        <select name="contract-type-filter">
+                            <option selected="" value="">All</option>
+                            <option value="global_m365">Microsoft 365</option>
+                            <option value="global_ox">Professional Email</option>
+                            <option value="global_titan">Professional Email powered by Titan</option>
+                        </select>
+                        <input class="fo contract-search-box" type="text" name="contract-search" placeholder="Product, ID or Email" value="" maxlength="90" size="18">
+                        <input type="hidden" name="action" value="filter-by-contract">
+                        <a class="professional_email-search-btn myButton professional_email action" href="#">
+                            <i class="icons8-search kis-Link-Icon"></i> search
+                        </a>
+                    </div>
+                </form>
+            </td>
+        </tr>
+    </tbody></table>
+                <div class="reloadable">
+                  <table class="content">
+                    <tbody>
+                    
+    <tr>
+        <td class="tdhead">contract ID</td>
+        <td class="tdhead">Contract type</td>
+        <td class="tdhead">package name</td>
+        <td class="tdhead">mail address</td>
+        <td class="tdhead" style="width:190px;">contract</td>
+    </tr>
+    <tr>
+      <td class="tdlinks1">14877201</td>
+      <td class="tdlinks1">Professional Email Pro Light<span class="row-banner free">Bundled email — free until 02.08.2027. Renews at €1.79/month after free period (Term: 24 months) unless cancelled.</span></td>
+      <td class="tdlinks1">my-domain.de</td>
+      <td class="tdlinks1">some-mail@my-domain.de</td>
+      <td class="tdlinks1"><a href="#" class="myButton professional_email action disabled">
+                <i class="icons8-right-2 kis-Link-Icon"></i> webmail login
+            </a><br><a href="#" class="myButton professional_email action disabled">
+                <i class="icons8-settings kis-Link-Icon"></i> configure
+            </a><br><a class="myButton professional_email action internal" data-contract-id="14877201" href="#"><i class="icons8-search kis-Link-Icon"></i> contract details</a><br><a class="myButton professional_email action internal" data-contract-id="14877201" href="#"><i class="icons8-edit kis-Link-Icon"></i> change package name</a><br><a class="myButton professional_email action internal" data-contract-id="14877201" href="#"><i class="icons8-cancel kis-Link-Icon"></i> cancel contract</a></td>
+    </tr>
+    <tr>
+      <td class="tdlinks0">14878280</td>
+      <td class="tdlinks0">Professional Email Pro Light<span class="row-banner cancel">No mailbox — will be cancelled on 28.07.2026 at end of free period (Term: 24 months).</span></td>
+      <td class="tdlinks0"></td>
+      <td class="tdlinks0"></td>
+      <td class="tdlinks0"><a href="#" class="myButton professional_email action disabled">
+                <i class="icons8-settings kis-Link-Icon"></i> configure
+            </a><br><a class="myButton professional_email action internal" data-contract-id="14878280" href="#"><i class="icons8-search kis-Link-Icon"></i> contract details</a><br><a class="myButton professional_email action internal" data-contract-id="14878280" href="#"><i class="icons8-edit kis-Link-Icon"></i> change package name</a><br><a class="myButton professional_email action internal" data-contract-id="14878280" href="#"><i class="icons8-cancel kis-Link-Icon"></i> cancel contract</a></td>
+    </tr>
+    <tr>
+      <td class="tdlinks1">14891042</td>
+      <td class="tdlinks1">Professional Email Pro Light<span class="row-banner free">Bundled email — free until 15.03.2026. Renews at €1.99/month after free period (Term: 1 year) unless cancelled.</span></td>
+      <td class="tdlinks1">shop-example.de</td>
+      <td class="tdlinks1">info@shop-example.de</td>
+      <td class="tdlinks1"><a href="#" class="myButton professional_email action disabled">
+                <i class="icons8-right-2 kis-Link-Icon"></i> webmail login
+            </a><br><a href="#" class="myButton professional_email action disabled">
+                <i class="icons8-settings kis-Link-Icon"></i> configure
+            </a><br><a class="myButton professional_email action internal" data-contract-id="14891042" href="#"><i class="icons8-search kis-Link-Icon"></i> contract details</a><br><a class="myButton professional_email action internal" data-contract-id="14891042" href="#"><i class="icons8-edit kis-Link-Icon"></i> change package name</a><br><a class="myButton professional_email action internal" data-contract-id="14891042" href="#"><i class="icons8-cancel kis-Link-Icon"></i> cancel contract</a></td>
+    </tr>
+    <tr>
+      <td class="tdlinks0">14892011</td>
+      <td class="tdlinks0">Professional Email Pro Light<span class="row-banner cancel">No mailbox — will be cancelled on 01.02.2026 at end of free period (Term: 1 year).</span></td>
+      <td class="tdlinks0"></td>
+      <td class="tdlinks0"></td>
+      <td class="tdlinks0"><a href="#" class="myButton professional_email action disabled">
+                <i class="icons8-settings kis-Link-Icon"></i> configure
+            </a><br><a class="myButton professional_email action internal" data-contract-id="14892011" href="#"><i class="icons8-search kis-Link-Icon"></i> contract details</a><br><a class="myButton professional_email action internal" data-contract-id="14892011" href="#"><i class="icons8-edit kis-Link-Icon"></i> change package name</a><br><a class="myButton professional_email action internal" data-contract-id="14892011" href="#"><i class="icons8-cancel kis-Link-Icon"></i> cancel contract</a></td>
+    </tr>
+    <tr>
+      <td class="tdlinks1">14893088</td>
+      <td class="tdlinks1">Professional Email Pro Light<span class="row-banner free">Bundled email — free until 15.07.2025. Renews at €2.49/month after free period (Term: 1 month) unless cancelled.</span></td>
+      <td class="tdlinks1">trial-site.com</td>
+      <td class="tdlinks1">hello@trial-site.com</td>
+      <td class="tdlinks1"><a href="#" class="myButton professional_email action disabled">
+                <i class="icons8-right-2 kis-Link-Icon"></i> webmail login
+            </a><br><a href="#" class="myButton professional_email action disabled">
+                <i class="icons8-settings kis-Link-Icon"></i> configure
+            </a><br><a class="myButton professional_email action internal" data-contract-id="14893088" href="#"><i class="icons8-search kis-Link-Icon"></i> contract details</a><br><a class="myButton professional_email action internal" data-contract-id="14893088" href="#"><i class="icons8-edit kis-Link-Icon"></i> change package name</a><br><a class="myButton professional_email action internal" data-contract-id="14893088" href="#"><i class="icons8-cancel kis-Link-Icon"></i> cancel contract</a></td>
+    </tr>
+    <tr>
+      <td class="tdlinks0">14893102</td>
+      <td class="tdlinks0">Professional Email Pro Light<span class="row-banner cancel">No mailbox — will be cancelled on 31.07.2025 at end of free period (Term: 1 month).</span></td>
+      <td class="tdlinks0"></td>
+      <td class="tdlinks0"></td>
+      <td class="tdlinks0"><a href="#" class="myButton professional_email action disabled">
+                <i class="icons8-settings kis-Link-Icon"></i> configure
+            </a><br><a class="myButton professional_email action internal" data-contract-id="14893102" href="#"><i class="icons8-search kis-Link-Icon"></i> contract details</a><br><a class="myButton professional_email action internal" data-contract-id="14893102" href="#"><i class="icons8-edit kis-Link-Icon"></i> change package name</a><br><a class="myButton professional_email action internal" data-contract-id="14893102" href="#"><i class="icons8-cancel kis-Link-Icon"></i> cancel contract</a></td>
+    </tr>
+    <tr>
+      <td class="tdlinks0">13952505</td>
+      <td class="tdlinks0">Professional Email Individual</td>
+      <td class="tdlinks0">business-site</td>
+      <td class="tdlinks0">info@business-site.com</td>
+      <td class="tdlinks0"><a href="#" class="myButton professional_email action disabled">
+                <i class="icons8-right-2 kis-Link-Icon"></i> webmail login
+            </a><br><a href="#" class="myButton professional_email action disabled">
+                <i class="icons8-settings kis-Link-Icon"></i> configure
+            </a><br><a class="myButton professional_email action internal" data-contract-id="13952505" href="#"><i class="icons8-search kis-Link-Icon"></i> contract details</a><br><a class="myButton professional_email action internal" data-contract-id="13952505" href="#"><i class="icons8-edit kis-Link-Icon"></i> change package name</a><br><a class="myButton professional_email action internal" data-contract-id="13952505" href="#"><i class="icons8-shopping-cart kis-Link-Icon"></i> upgrade contract</a><br><a class="myButton professional_email action internal" data-contract-id="13952505" href="#"><i class="icons8-cancel kis-Link-Icon"></i> cancel contract</a></td>
+    </tr>
+                    
+        <tfoot>
+        <tr>
+            <td colspan="5" align="center">7 contracts found</td>
+        </tr>
+        <tr>
+            <td colspan="5" align="center">1 of 1</td>
+        </tr>
+        </tfoot>
+                    </tbody>
+                  </table>
+                  
+                </div>
+                
+    <div style="padding:15px;margin-top:8px;" id="headnav_wrapper">
+        <span style="display:inline-block;width:100%;" class="kis-Table-Title">
+            Product Ordering<i class="icons8-shopping-cart kis-Table-Title-Icon"></i>
+        </span><br>
+        Order here easily <span style="white-space: nowrap;"><i class="icons8-up-right kis-Link-Icon"></i><a href="https://www.hosteurope.de/en/E-Mail-Hosting-2/" target="_blank">more Professional Email (Individual or Team) Packages</a></span><br>
+        Order here easily <span style="white-space: nowrap;"><i class="icons8-up-right kis-Link-Icon"></i><a href="https://www.hosteurope.de/en/E-Mail-Hosting/" target="_blank">more Professional Email (powered by Titan) Packages</a></span><br>
+        Order here easily <span style="white-space: nowrap;"><i class="icons8-up-right kis-Link-Icon"></i><a href="https://www.hosteurope.de/Office-365/" target="_blank">more Microsoft 365 licences</a></span>
+    </div>
+              </div>
+            </div>
+          </div>
+        </td>
+      </tr>
+    </tbody></table>
+  </div>
+</div>
+
+<div class="variant-panel hidden" id="variant-5">
+  <div class="master_container mockup-frame">
+    <table class="fl_mainWrapper" cellspacing="0" cellpadding="0">
+      <tbody><tr>
+        <td id="mainMenu">
+          <div class="mainMenu">
+            <div class="fl_logo">
+              <a href="/"><img src="/gfx/faceLift/he_logo.png" alt="" title=""></a>
+            </div>
+            <div id="languageSelectorContainer" data-language="en">
+              <form method="GET">
+                <img style="vertical-align:middle;" src="/gfx/flags/flag_great_britain.png" title="English" alt="">
+                <select class="language_minimal" name="languageSelector">
+                  <option value="de">Deutsch</option>
+                  <option value="en" selected="selected">English</option>
+                </select>
+              </form>
+            </div>
+            <div class="menubuttons">
+              <div class="menubutton-l1"><a href="/">Home</a></div>
+              <div class="menubutton-l1-active"><a href="/administration/">Product Admin</a></div>
+              <div class="menubutton-l1"><a href="/kundenkonto/kontaktdaten/">Account</a></div>
+              <div class="menubutton-l1"><a href="/allgemeines/">Downloads &amp; Links</a></div>
+              <div class="menubutton-l1"><a href="/support/">Support</a></div>
+              <div class="menubutton-l1"><a href="https://www.hosteurope.de/faq/" target="_blank">FAQ</a></div>
+            </div>
+            <div id="fl_logout_btn">
+              <a href="/?logout=1"><i class="icons8-logout-rounded fl_logout_icon"></i>&nbsp;Log out</a>
+            </div>
+          </div>
+          <div class="fl_customerInfo textFit">
+            You're logged in:<br>
+            <b>Maria Schneider</b> - <br>m.schneider (417293)
+          </div>
+          <div class="fl_customerInfo">
+            served by:<br>
+            <b>server12.kis</b>
+          </div>
+        </td>
+        <td style="vertical-align:top">
+          <div id="contentcol">
+            <div id="breadcrumb">
+              <a class="headline" href="/administration/">Product Admin</a>&nbsp;-&nbsp;
+              <a class="headline" href="/administration/email/">Email</a>
+            </div>
+            <div class="clear"></div>
+            <div style="background-color:#fff;">
+              <a class="menubutton-l2 highlighted-menu-item" href="/administration/contract-overview/">
+                <i class="icons8-contract-overview menubutton-l2-icon"></i><br>Contract Overview
+              </a>
+              <a class="menubutton-l2" href="/administration/domainservices/">
+                <i class="icons8-domain menubutton-l2-icon"></i><br>Domainservices
+              </a>
+              <a class="menubutton-l2" href="/administration/cpanel/">
+                <i class="icons8-cpanel menubutton-l2-icon"></i><br>cPanel WebHosting
+              </a>
+              <a class="menubutton-l2" href="/administration/managed-wordpress/">
+                <i class="icons8-wordpress menubutton-l2-icon"></i><br>Managed Wordpress
+              </a>
+              <a class="menubutton-l2-active" href="/administration/email/">
+                <i class="icons8-email menubutton-l2-icon-active"></i><br>Email
+              </a>
+            </div>
+            <br style="clear:both">
+          </div>
+          <br>
+          <div id="contentcol" style="padding-top:10px;">
+            <div class="fl_welcome" style="padding-left:5px;">
+              <div id="professional_email-index">
+                
+    <table style="width: 100%">
+        <tbody><tr>
+            <td>
+                Here is an overview of your existing Professional Email and Microsoft 365 contracts. <br><br>
+                Besides that you can enter your personal E-Mail Administration:
+                <button class="myButton disabled" disabled="">
+                    <i class="icons8-right-2 kis-Link-Icon"></i>START NOW
+                </button>
+            </td>
+            <td align="right" width="25%" id="professional_email-search-box">
+                <form class="professional_email-search-form action-ajax-form" method="post" action="/administration/email/">
+                    <div class="input-wrapper">
+                        <select name="contract-type-filter">
+                            <option selected="" value="">All</option>
+                            <option value="global_m365">Microsoft 365</option>
+                            <option value="global_ox">Professional Email</option>
+                            <option value="global_titan">Professional Email powered by Titan</option>
+                        </select>
+                        <input class="fo contract-search-box" type="text" name="contract-search" placeholder="Product, ID or Email" value="" maxlength="90" size="18">
+                        <input type="hidden" name="action" value="filter-by-contract">
+                        <a class="professional_email-search-btn myButton professional_email action" href="#">
+                            <i class="icons8-search kis-Link-Icon"></i> search
+                        </a>
+                    </div>
+                </form>
+            </td>
+        </tr>
+    </tbody></table>
+                <div class="reloadable">
+                  <table class="content">
+                    <tbody>
+                    
+    <tr>
+        <td class="tdhead">contract ID</td>
+        <td class="tdhead">Contract type</td>
+        <td class="tdhead">package name</td>
+        <td class="tdhead">mail address</td>
+        <td class="tdhead" style="width:190px;">contract</td>
+    </tr>
+    <tr>
+      <td class="tdlinks1">
+    14877201
+    <span class="contract-date ">Free until 02.08.2027</span>
+    <button type="button" class="help-toggle" onclick="toggleHelp('14877201-help')">What does this mean?</button>
+    <div class="help-panel" id="14877201-help">This bundled email is free until 02.08.2027 (Term: 24 months). After that: €1.79/month unless you cancel.</div></td>
+      <td class="tdlinks1">Professional Email Pro Light</td>
+      <td class="tdlinks1">my-domain.de</td>
+      <td class="tdlinks1">some-mail@my-domain.de</td>
+      <td class="tdlinks1"><a href="#" class="myButton professional_email action disabled">
+                <i class="icons8-right-2 kis-Link-Icon"></i> webmail login
+            </a><br><a href="#" class="myButton professional_email action disabled">
+                <i class="icons8-settings kis-Link-Icon"></i> configure
+            </a><br><a class="myButton professional_email action internal" data-contract-id="14877201" href="#"><i class="icons8-search kis-Link-Icon"></i> contract details</a><br><a class="myButton professional_email action internal" data-contract-id="14877201" href="#"><i class="icons8-edit kis-Link-Icon"></i> change package name</a><br><a class="myButton professional_email action internal" data-contract-id="14877201" href="#"><i class="icons8-cancel kis-Link-Icon"></i> cancel contract</a></td>
+    </tr>
+    <tr>
+      <td class="tdlinks0">
+    14878280
+    <span class="contract-date warn">Will be cancelled on 28.07.2026</span>
+    <button type="button" class="help-toggle" onclick="toggleHelp('14878280-help')">What does this mean?</button>
+    <div class="help-panel" id="14878280-help">No mailbox was set up. This bundled email will be cancelled on 28.07.2026.</div></td>
+      <td class="tdlinks0">Professional Email Pro Light</td>
+      <td class="tdlinks0"></td>
+      <td class="tdlinks0"></td>
+      <td class="tdlinks0"><a href="#" class="myButton professional_email action disabled">
+                <i class="icons8-settings kis-Link-Icon"></i> configure
+            </a><br><a class="myButton professional_email action internal" data-contract-id="14878280" href="#"><i class="icons8-search kis-Link-Icon"></i> contract details</a><br><a class="myButton professional_email action internal" data-contract-id="14878280" href="#"><i class="icons8-edit kis-Link-Icon"></i> change package name</a><br><a class="myButton professional_email action internal" data-contract-id="14878280" href="#"><i class="icons8-cancel kis-Link-Icon"></i> cancel contract</a></td>
+    </tr>
+    <tr>
+      <td class="tdlinks1">
+    14891042
+    <span class="contract-date ">Free until 15.03.2026</span>
+    <button type="button" class="help-toggle" onclick="toggleHelp('14891042-help')">What does this mean?</button>
+    <div class="help-panel" id="14891042-help">This bundled email is free until 15.03.2026 (Term: 1 year). After that: €1.99/month unless you cancel.</div></td>
+      <td class="tdlinks1">Professional Email Pro Light</td>
+      <td class="tdlinks1">shop-example.de</td>
+      <td class="tdlinks1">info@shop-example.de</td>
+      <td class="tdlinks1"><a href="#" class="myButton professional_email action disabled">
+                <i class="icons8-right-2 kis-Link-Icon"></i> webmail login
+            </a><br><a href="#" class="myButton professional_email action disabled">
+                <i class="icons8-settings kis-Link-Icon"></i> configure
+            </a><br><a class="myButton professional_email action internal" data-contract-id="14891042" href="#"><i class="icons8-search kis-Link-Icon"></i> contract details</a><br><a class="myButton professional_email action internal" data-contract-id="14891042" href="#"><i class="icons8-edit kis-Link-Icon"></i> change package name</a><br><a class="myButton professional_email action internal" data-contract-id="14891042" href="#"><i class="icons8-cancel kis-Link-Icon"></i> cancel contract</a></td>
+    </tr>
+    <tr>
+      <td class="tdlinks0">
+    14892011
+    <span class="contract-date warn">Will be cancelled on 01.02.2026</span>
+    <button type="button" class="help-toggle" onclick="toggleHelp('14892011-help')">What does this mean?</button>
+    <div class="help-panel" id="14892011-help">No mailbox was set up. This bundled email will be cancelled on 01.02.2026.</div></td>
+      <td class="tdlinks0">Professional Email Pro Light</td>
+      <td class="tdlinks0"></td>
+      <td class="tdlinks0"></td>
+      <td class="tdlinks0"><a href="#" class="myButton professional_email action disabled">
+                <i class="icons8-settings kis-Link-Icon"></i> configure
+            </a><br><a class="myButton professional_email action internal" data-contract-id="14892011" href="#"><i class="icons8-search kis-Link-Icon"></i> contract details</a><br><a class="myButton professional_email action internal" data-contract-id="14892011" href="#"><i class="icons8-edit kis-Link-Icon"></i> change package name</a><br><a class="myButton professional_email action internal" data-contract-id="14892011" href="#"><i class="icons8-cancel kis-Link-Icon"></i> cancel contract</a></td>
+    </tr>
+    <tr>
+      <td class="tdlinks1">
+    14893088
+    <span class="contract-date ">Free until 15.07.2025</span>
+    <button type="button" class="help-toggle" onclick="toggleHelp('14893088-help')">What does this mean?</button>
+    <div class="help-panel" id="14893088-help">This bundled email is free until 15.07.2025 (Term: 1 month). After that: €2.49/month unless you cancel.</div></td>
+      <td class="tdlinks1">Professional Email Pro Light</td>
+      <td class="tdlinks1">trial-site.com</td>
+      <td class="tdlinks1">hello@trial-site.com</td>
+      <td class="tdlinks1"><a href="#" class="myButton professional_email action disabled">
+                <i class="icons8-right-2 kis-Link-Icon"></i> webmail login
+            </a><br><a href="#" class="myButton professional_email action disabled">
+                <i class="icons8-settings kis-Link-Icon"></i> configure
+            </a><br><a class="myButton professional_email action internal" data-contract-id="14893088" href="#"><i class="icons8-search kis-Link-Icon"></i> contract details</a><br><a class="myButton professional_email action internal" data-contract-id="14893088" href="#"><i class="icons8-edit kis-Link-Icon"></i> change package name</a><br><a class="myButton professional_email action internal" data-contract-id="14893088" href="#"><i class="icons8-cancel kis-Link-Icon"></i> cancel contract</a></td>
+    </tr>
+    <tr>
+      <td class="tdlinks0">
+    14893102
+    <span class="contract-date warn">Will be cancelled on 31.07.2025</span>
+    <button type="button" class="help-toggle" onclick="toggleHelp('14893102-help')">What does this mean?</button>
+    <div class="help-panel" id="14893102-help">No mailbox was set up. This bundled email will be cancelled on 31.07.2025.</div></td>
+      <td class="tdlinks0">Professional Email Pro Light</td>
+      <td class="tdlinks0"></td>
+      <td class="tdlinks0"></td>
+      <td class="tdlinks0"><a href="#" class="myButton professional_email action disabled">
+                <i class="icons8-settings kis-Link-Icon"></i> configure
+            </a><br><a class="myButton professional_email action internal" data-contract-id="14893102" href="#"><i class="icons8-search kis-Link-Icon"></i> contract details</a><br><a class="myButton professional_email action internal" data-contract-id="14893102" href="#"><i class="icons8-edit kis-Link-Icon"></i> change package name</a><br><a class="myButton professional_email action internal" data-contract-id="14893102" href="#"><i class="icons8-cancel kis-Link-Icon"></i> cancel contract</a></td>
+    </tr>
+    <tr>
+      <td class="tdlinks0">13952505</td>
+      <td class="tdlinks0">Professional Email Individual</td>
+      <td class="tdlinks0">business-site</td>
+      <td class="tdlinks0">info@business-site.com</td>
+      <td class="tdlinks0"><a href="#" class="myButton professional_email action disabled">
+                <i class="icons8-right-2 kis-Link-Icon"></i> webmail login
+            </a><br><a href="#" class="myButton professional_email action disabled">
+                <i class="icons8-settings kis-Link-Icon"></i> configure
+            </a><br><a class="myButton professional_email action internal" data-contract-id="13952505" href="#"><i class="icons8-search kis-Link-Icon"></i> contract details</a><br><a class="myButton professional_email action internal" data-contract-id="13952505" href="#"><i class="icons8-edit kis-Link-Icon"></i> change package name</a><br><a class="myButton professional_email action internal" data-contract-id="13952505" href="#"><i class="icons8-shopping-cart kis-Link-Icon"></i> upgrade contract</a><br><a class="myButton professional_email action internal" data-contract-id="13952505" href="#"><i class="icons8-cancel kis-Link-Icon"></i> cancel contract</a></td>
+    </tr>
+                    
+        <tfoot>
+        <tr>
+            <td colspan="5" align="center">7 contracts found</td>
+        </tr>
+        <tr>
+            <td colspan="5" align="center">1 of 1</td>
+        </tr>
+        </tfoot>
+                    </tbody>
+                  </table>
+                  
+                </div>
+                
+    <div style="padding:15px;margin-top:8px;" id="headnav_wrapper">
+        <span style="display:inline-block;width:100%;" class="kis-Table-Title">
+            Product Ordering<i class="icons8-shopping-cart kis-Table-Title-Icon"></i>
+        </span><br>
+        Order here easily <span style="white-space: nowrap;"><i class="icons8-up-right kis-Link-Icon"></i><a href="https://www.hosteurope.de/en/E-Mail-Hosting-2/" target="_blank">more Professional Email (Individual or Team) Packages</a></span><br>
+        Order here easily <span style="white-space: nowrap;"><i class="icons8-up-right kis-Link-Icon"></i><a href="https://www.hosteurope.de/en/E-Mail-Hosting/" target="_blank">more Professional Email (powered by Titan) Packages</a></span><br>
+        Order here easily <span style="white-space: nowrap;"><i class="icons8-up-right kis-Link-Icon"></i><a href="https://www.hosteurope.de/Office-365/" target="_blank">more Microsoft 365 licences</a></span>
+    </div>
+              </div>
+            </div>
+          </div>
+        </td>
+      </tr>
+    </tbody></table>
+  </div>
+</div>
+
+<div class="variant-panel hidden" id="variant-6">
+  <div class="master_container mockup-frame">
+    <table class="fl_mainWrapper" cellspacing="0" cellpadding="0">
+      <tbody><tr>
+        <td id="mainMenu">
+          <div class="mainMenu">
+            <div class="fl_logo">
+              <a href="/"><img src="/gfx/faceLift/he_logo.png" alt="" title=""></a>
+            </div>
+            <div id="languageSelectorContainer" data-language="en">
+              <form method="GET">
+                <img style="vertical-align:middle;" src="/gfx/flags/flag_great_britain.png" title="English" alt="">
+                <select class="language_minimal" name="languageSelector">
+                  <option value="de">Deutsch</option>
+                  <option value="en" selected="selected">English</option>
+                </select>
+              </form>
+            </div>
+            <div class="menubuttons">
+              <div class="menubutton-l1"><a href="/">Home</a></div>
+              <div class="menubutton-l1-active"><a href="/administration/">Product Admin</a></div>
+              <div class="menubutton-l1"><a href="/kundenkonto/kontaktdaten/">Account</a></div>
+              <div class="menubutton-l1"><a href="/allgemeines/">Downloads &amp; Links</a></div>
+              <div class="menubutton-l1"><a href="/support/">Support</a></div>
+              <div class="menubutton-l1"><a href="https://www.hosteurope.de/faq/" target="_blank">FAQ</a></div>
+            </div>
+            <div id="fl_logout_btn">
+              <a href="/?logout=1"><i class="icons8-logout-rounded fl_logout_icon"></i>&nbsp;Log out</a>
+            </div>
+          </div>
+          <div class="fl_customerInfo textFit">
+            You're logged in:<br>
+            <b>Maria Schneider</b> - <br>m.schneider (417293)
+          </div>
+          <div class="fl_customerInfo">
+            served by:<br>
+            <b>server12.kis</b>
+          </div>
+        </td>
+        <td style="vertical-align:top">
+          <div id="contentcol">
+            <div id="breadcrumb">
+              <a class="headline" href="/administration/">Product Admin</a>&nbsp;-&nbsp;
+              <a class="headline" href="/administration/email/">Email</a>
+            </div>
+            <div class="clear"></div>
+            <div style="background-color:#fff;">
+              <a class="menubutton-l2 highlighted-menu-item" href="/administration/contract-overview/">
+                <i class="icons8-contract-overview menubutton-l2-icon"></i><br>Contract Overview
+              </a>
+              <a class="menubutton-l2" href="/administration/domainservices/">
+                <i class="icons8-domain menubutton-l2-icon"></i><br>Domainservices
+              </a>
+              <a class="menubutton-l2" href="/administration/cpanel/">
+                <i class="icons8-cpanel menubutton-l2-icon"></i><br>cPanel WebHosting
+              </a>
+              <a class="menubutton-l2" href="/administration/managed-wordpress/">
+                <i class="icons8-wordpress menubutton-l2-icon"></i><br>Managed Wordpress
+              </a>
+              <a class="menubutton-l2-active" href="/administration/email/">
+                <i class="icons8-email menubutton-l2-icon-active"></i><br>Email
+              </a>
+            </div>
+            <br style="clear:both">
+          </div>
+          <br>
+          <div id="contentcol" style="padding-top:10px;">
+            <div class="fl_welcome" style="padding-left:5px;">
+              <div id="professional_email-index">
+                
+    <table style="width: 100%">
+        <tbody><tr>
+            <td>
+                Here is an overview of your existing Professional Email and Microsoft 365 contracts. <br><br>
+                Besides that you can enter your personal E-Mail Administration:
+                <button class="myButton disabled" disabled="">
+                    <i class="icons8-right-2 kis-Link-Icon"></i>START NOW
+                </button>
+            </td>
+            <td align="right" width="25%" id="professional_email-search-box">
+                <form class="professional_email-search-form action-ajax-form" method="post" action="/administration/email/">
+                    <div class="input-wrapper">
+                        <select name="contract-type-filter">
+                            <option selected="" value="">All</option>
+                            <option value="global_m365">Microsoft 365</option>
+                            <option value="global_ox">Professional Email</option>
+                            <option value="global_titan">Professional Email powered by Titan</option>
+                        </select>
+                        <input class="fo contract-search-box" type="text" name="contract-search" placeholder="Product, ID or Email" value="" maxlength="90" size="18">
+                        <input type="hidden" name="action" value="filter-by-contract">
+                        <a class="professional_email-search-btn myButton professional_email action" href="#">
+                            <i class="icons8-search kis-Link-Icon"></i> search
+                        </a>
+                    </div>
+                </form>
+            </td>
+        </tr>
+    </tbody></table>
+                <div class="reloadable">
+                  <table class="content">
+                    <tbody>
+                    
+    <tr>
+        <td class="tdhead">contract ID</td>
+        <td class="tdhead">Contract type</td>
+        <td class="tdhead">package name</td>
+        <td class="tdhead">mail address</td>
+        <td class="tdhead" style="width:190px;">contract</td>
+    </tr>
+    <tr>
+      <td class="tdlinks1">14877201</td>
+      <td class="tdlinks1">Professional Email Pro Light<span class="bundled-sub">Free until 02.08.2027 — then €1.79/month (bundled with Managed WordPress Basic)<sup>1</sup></span></td>
+      <td class="tdlinks1">my-domain.de</td>
+      <td class="tdlinks1">some-mail@my-domain.de</td>
+      <td class="tdlinks1"><a href="#" class="myButton professional_email action disabled">
+                <i class="icons8-right-2 kis-Link-Icon"></i> webmail login
+            </a><br><a href="#" class="myButton professional_email action disabled">
+                <i class="icons8-settings kis-Link-Icon"></i> configure
+            </a><br><a class="myButton professional_email action internal" data-contract-id="14877201" href="#"><i class="icons8-search kis-Link-Icon"></i> contract details</a><br><a class="myButton professional_email action internal" data-contract-id="14877201" href="#"><i class="icons8-edit kis-Link-Icon"></i> change package name</a><br><a class="myButton professional_email action internal" data-contract-id="14877201" href="#"><i class="icons8-cancel kis-Link-Icon"></i> cancel contract</a></td>
+    </tr>
+    <tr>
+      <td class="tdlinks0">14878280</td>
+      <td class="tdlinks0">Professional Email Pro Light<span class="bundled-sub">Will be cancelled on 28.07.2026 (bundled with WebHosting Basic)<sup>‡</sup></span></td>
+      <td class="tdlinks0"></td>
+      <td class="tdlinks0"></td>
+      <td class="tdlinks0"><a href="#" class="myButton professional_email action disabled">
+                <i class="icons8-settings kis-Link-Icon"></i> configure
+            </a><br><a class="myButton professional_email action internal" data-contract-id="14878280" href="#"><i class="icons8-search kis-Link-Icon"></i> contract details</a><br><a class="myButton professional_email action internal" data-contract-id="14878280" href="#"><i class="icons8-edit kis-Link-Icon"></i> change package name</a><br><a class="myButton professional_email action internal" data-contract-id="14878280" href="#"><i class="icons8-cancel kis-Link-Icon"></i> cancel contract</a></td>
+    </tr>
+    <tr>
+      <td class="tdlinks1">14891042</td>
+      <td class="tdlinks1">Professional Email Pro Light<span class="bundled-sub">Free until 15.03.2026 — then €1.99/month (bundled with cPanel WebHosting Basic)<sup>2</sup></span></td>
+      <td class="tdlinks1">shop-example.de</td>
+      <td class="tdlinks1">info@shop-example.de</td>
+      <td class="tdlinks1"><a href="#" class="myButton professional_email action disabled">
+                <i class="icons8-right-2 kis-Link-Icon"></i> webmail login
+            </a><br><a href="#" class="myButton professional_email action disabled">
+                <i class="icons8-settings kis-Link-Icon"></i> configure
+            </a><br><a class="myButton professional_email action internal" data-contract-id="14891042" href="#"><i class="icons8-search kis-Link-Icon"></i> contract details</a><br><a class="myButton professional_email action internal" data-contract-id="14891042" href="#"><i class="icons8-edit kis-Link-Icon"></i> change package name</a><br><a class="myButton professional_email action internal" data-contract-id="14891042" href="#"><i class="icons8-cancel kis-Link-Icon"></i> cancel contract</a></td>
+    </tr>
+    <tr>
+      <td class="tdlinks0">14892011</td>
+      <td class="tdlinks0">Professional Email Pro Light<span class="bundled-sub">Will be cancelled on 01.02.2026 (bundled with Managed WordPress Basic)<sup>‡</sup></span></td>
+      <td class="tdlinks0"></td>
+      <td class="tdlinks0"></td>
+      <td class="tdlinks0"><a href="#" class="myButton professional_email action disabled">
+                <i class="icons8-settings kis-Link-Icon"></i> configure
+            </a><br><a class="myButton professional_email action internal" data-contract-id="14892011" href="#"><i class="icons8-search kis-Link-Icon"></i> contract details</a><br><a class="myButton professional_email action internal" data-contract-id="14892011" href="#"><i class="icons8-edit kis-Link-Icon"></i> change package name</a><br><a class="myButton professional_email action internal" data-contract-id="14892011" href="#"><i class="icons8-cancel kis-Link-Icon"></i> cancel contract</a></td>
+    </tr>
+    <tr>
+      <td class="tdlinks1">14893088</td>
+      <td class="tdlinks1">Professional Email Pro Light<span class="bundled-sub">Free until 15.07.2025 — then €2.49/month (bundled with WebHosting Basic)<sup>3</sup></span></td>
+      <td class="tdlinks1">trial-site.com</td>
+      <td class="tdlinks1">hello@trial-site.com</td>
+      <td class="tdlinks1"><a href="#" class="myButton professional_email action disabled">
+                <i class="icons8-right-2 kis-Link-Icon"></i> webmail login
+            </a><br><a href="#" class="myButton professional_email action disabled">
+                <i class="icons8-settings kis-Link-Icon"></i> configure
+            </a><br><a class="myButton professional_email action internal" data-contract-id="14893088" href="#"><i class="icons8-search kis-Link-Icon"></i> contract details</a><br><a class="myButton professional_email action internal" data-contract-id="14893088" href="#"><i class="icons8-edit kis-Link-Icon"></i> change package name</a><br><a class="myButton professional_email action internal" data-contract-id="14893088" href="#"><i class="icons8-cancel kis-Link-Icon"></i> cancel contract</a></td>
+    </tr>
+    <tr>
+      <td class="tdlinks0">14893102</td>
+      <td class="tdlinks0">Professional Email Pro Light<span class="bundled-sub">Will be cancelled on 31.07.2025 (bundled with cPanel WebHosting Basic)<sup>‡</sup></span></td>
+      <td class="tdlinks0"></td>
+      <td class="tdlinks0"></td>
+      <td class="tdlinks0"><a href="#" class="myButton professional_email action disabled">
+                <i class="icons8-settings kis-Link-Icon"></i> configure
+            </a><br><a class="myButton professional_email action internal" data-contract-id="14893102" href="#"><i class="icons8-search kis-Link-Icon"></i> contract details</a><br><a class="myButton professional_email action internal" data-contract-id="14893102" href="#"><i class="icons8-edit kis-Link-Icon"></i> change package name</a><br><a class="myButton professional_email action internal" data-contract-id="14893102" href="#"><i class="icons8-cancel kis-Link-Icon"></i> cancel contract</a></td>
+    </tr>
+    <tr>
+      <td class="tdlinks0">13952505</td>
+      <td class="tdlinks0">Professional Email Individual</td>
+      <td class="tdlinks0">business-site</td>
+      <td class="tdlinks0">info@business-site.com</td>
+      <td class="tdlinks0"><a href="#" class="myButton professional_email action disabled">
+                <i class="icons8-right-2 kis-Link-Icon"></i> webmail login
+            </a><br><a href="#" class="myButton professional_email action disabled">
+                <i class="icons8-settings kis-Link-Icon"></i> configure
+            </a><br><a class="myButton professional_email action internal" data-contract-id="13952505" href="#"><i class="icons8-search kis-Link-Icon"></i> contract details</a><br><a class="myButton professional_email action internal" data-contract-id="13952505" href="#"><i class="icons8-edit kis-Link-Icon"></i> change package name</a><br><a class="myButton professional_email action internal" data-contract-id="13952505" href="#"><i class="icons8-shopping-cart kis-Link-Icon"></i> upgrade contract</a><br><a class="myButton professional_email action internal" data-contract-id="13952505" href="#"><i class="icons8-cancel kis-Link-Icon"></i> cancel contract</a></td>
+    </tr>
+                    
+        <tfoot>
+        <tr>
+            <td colspan="5" align="center">7 contracts found</td>
+        </tr>
+        <tr>
+            <td colspan="5" align="center">1 of 1</td>
+        </tr>
+        </tfoot>
+                    </tbody>
+                  </table>
+                  
+    <div class="footnote-block">
+      <p>Bundled email is free for the duration of the parent contract term if a mailbox is created (activated).</p>
+      <p><sup>‡</sup> If no mailbox is created, the product is automatically cancelled at the end of the free period.</p>
+      <p><strong>Renewal price by contract term:</strong><br><sup>1</sup> Term: 24 months → €1.79/month after free period<br><sup>2</sup> Term: 1 year → €1.99/month after free period<br><sup>3</sup> Term: 1 month → €2.49/month after free period</p>
+      <p>For contract terms longer than 12 months, the bundled price applies from month 13 until the end of the contract term, then auto-renews unless cancelled.</p>
+      <p>Email can be cancelled independently of other bundled products.</p>
+      <p>Where shown, the parent bundle product is named for reference only. The free period follows the parent contract term; renewal pricing depends on that term length.</p>
+    </div>
+                </div>
+                
+    <div style="padding:15px;margin-top:8px;" id="headnav_wrapper">
+        <span style="display:inline-block;width:100%;" class="kis-Table-Title">
+            Product Ordering<i class="icons8-shopping-cart kis-Table-Title-Icon"></i>
+        </span><br>
+        Order here easily <span style="white-space: nowrap;"><i class="icons8-up-right kis-Link-Icon"></i><a href="https://www.hosteurope.de/en/E-Mail-Hosting-2/" target="_blank">more Professional Email (Individual or Team) Packages</a></span><br>
+        Order here easily <span style="white-space: nowrap;"><i class="icons8-up-right kis-Link-Icon"></i><a href="https://www.hosteurope.de/en/E-Mail-Hosting/" target="_blank">more Professional Email (powered by Titan) Packages</a></span><br>
+        Order here easily <span style="white-space: nowrap;"><i class="icons8-up-right kis-Link-Icon"></i><a href="https://www.hosteurope.de/Office-365/" target="_blank">more Microsoft 365 licences</a></span>
+    </div>
+              </div>
+            </div>
+          </div>
+        </td>
+      </tr>
+    </tbody></table>
+  </div>
+</div>
+
+<div class="variant-panel hidden" id="variant-7">
+  <div class="mockup-frame">
+    <div class="order-confirmation-frame">
+      <div class="oc-header">
+        <div>
+          <strong>Host Europe GmbH</strong><br>
+          c/o Spaces, Gertrudenstr. 30-36, 50667 Köln
+        </div>
+        <div style="text-align:right;">
+          Auftragsnummer: C4LUP92<br>
+          Datum: 11.06.2026
+        </div>
+      </div>
+
+      <p>Maria Schneider<br>m.schneider (417293)<br>z. Hd. Frau Maria Schneider<br>Musterstraße 12<br>10115 Berlin<br>DEUTSCHLAND</p>
+
+      <div class="oc-title">Bestellbestätigung</div>
+
+      <div class="oc-address-grid">
+        <div>
+          <h4>Auftraggeber</h4>
+          Kundennummer: 417293<br>
+          Name: Maria Schneider<br>
+          Ansprechpartner: Maria Schneider<br>
+          E-Mail: m.schneider@example.com
+        </div>
+        <div>
+          <h4>Auftragnehmer</h4>
+          Host Europe GmbH<br>
+          c/o WeWork Friesenplatz 4<br>
+          50672 Köln<br>
+          Serviceline: +49 221 99999 301
+        </div>
+      </div>
+
+      <p>Sehr geehrte Kundin, sehr geehrter Kunde,</p>
+      <p>Sie bestellten aus unserem Angebot folgende Leistung:</p>
+
+      <table class="oc-products">
+        <thead>
+          <tr>
+            <th>Leistung</th>
+            <th>EUR</th>
+            <th>EUR Setup</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>
+              1 × cPanel - WebHosting Standard
+              <div class="oc-product-detail">
+                Webseiten: 1 · Speicherplatz: 25 GB · Datenbanken: 10<br>
+                E-Mail: 1 × 1 GB Professional E-Mail<br>
+                SSL: 1 Domain SSL-Zertifikat inklusive · Traffic: unbegrenzt<br>
+                Vertragslaufzeit: 12 Monate · Abrechnungszeitraum: monatlich im Voraus<br>
+                Kündigungsfrist: 1 Monat · Folgevertragslaufzeit: 12 Monate
+              </div>
+            </td>
+            <td>6,04</td>
+            <td>0,00</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <p><strong>Erste Rechnung EUR 6,04</strong> · Gesamtbetrag erste Rechnung EUR 6,04</p>
+      <p style="font-size:10px;color:#666;">Alle angeführten Preise verstehen sich inkl. der gesetzlich gültigen MwSt. Preisänderungen und Irrtümer vorbehalten.</p>
+
+      <div class="oc-footnotes">
+        <p><sup>1</sup> cPanel - WebHosting Standard 5,99 € monatlich im Voraus; 0,00 € Setupgebühr; Mindestvertragslaufzeit 12 Monate, anschließend mit Frist von einem Monat zum Ende der Vertragslaufzeit kündbar, andernfalls automatische Verlängerungen um jeweils 12 Monate. Preise enthalten 19 % MwSt.</p>
+
+        <p class="oc-footnote-old"><sup>2</sup> 2 Professional Email Pro Light für 12 Monate kostenfrei (Mindestvertragslaufzeit 12 Monate), danach 1,99 € monatlich brutto, 0,00 € Setup-Gebühr.</p>
+
+        <div class="oc-footnote-new">
+          <span class="oc-label-new">Neu — Fußnote ²</span>
+          <p style="margin:0;"><sup>2</sup> 2 Professional Email Pro Light: Kostenlos für die ersten 12 Monate der Bundle-Laufzeit, sofern aktiviert (Mailbox eingerichtet). Aktivierte Produkte verlängern sich automatisch zum Ende einer 12-monatigen Bundle-Laufzeit zu 1,99 € monatlich brutto, sofern nicht gekündigt. Bei Bundle-Laufzeiten von mehr als 12 Monaten gilt ab Monat 13 bis zum Ende der Bundle-Laufzeit 1,79 € monatlich brutto; anschließend verlängert sich das Produkt automatisch, sofern nicht gekündigt. Dieses Produkt kann unabhängig von anderen gebündelten Produkten gekündigt werden. 0,00 € Setup-Gebühr.</p>
+        </div>
+
+        <p style="font-size:9px;color:#888;margin-top:12px;"><em>Referenz (EN):</em> Free for the first 12 months of the bundle term if activated. Activated products will automatically renew at €1.99/month at the end of a 12-month bundle term unless cancelled. For bundle terms longer than 12 months, €1.79/month will apply from month 13 until the end of the bundle term, after which the product will automatically renew unless cancelled. This product may be cancelled independently of other bundled products.</p>
+      </div>
+
+      <a class="oc-pdf-link" href="reference/he_143793244_bestellbestaetigung-C4LUP92.pdf" target="_blank">
+        ↗ Original-PDF: he_143793244_bestellbestaetigung-C4LUP92.pdf
+      </a>
+    </div>
+  </div>
+</div>
+</div>
+
+<script>
+const VARIANT_NOTES = {
+  1: "Subtext under contract type with numbered footnotes below the table. No parent product named.",
+  2: "Green (i) icon next to bundled contract IDs — hover for details. No parent product named.",
+  3: "New \"Bundled status\" column with colour-coded badges. No parent product named.",
+  4: "Inline coloured alert strip inside bundled rows. No parent product named.",
+  5: "Date on contract ID plus \"What does this mean?\" expandable panel. No parent product named.",
+  6: "Footnotes approach that also names the parent bundle product per row (optional disclosure).",
+  7: "German order confirmation (PDF) — updated footnote ² for bundled Professional Email Pro Light."
+};
+
+function showVariant(id) {
+  document.querySelectorAll('.variant-panel').forEach(function(p) { p.classList.add('hidden'); });
+  var panel = document.getElementById('variant-' + id);
+  if (panel) panel.classList.remove('hidden');
+  document.querySelectorAll('.variant-tab').forEach(function(t) {
+    t.classList.toggle('active', Number(t.dataset.id) === id);
+  });
+  document.getElementById('review-meta').textContent = VARIANT_NOTES[id] || '';
+}
+
+function toggleHelp(id) {
+  var el = document.getElementById(id);
+  if (el) el.classList.toggle('open');
+}
+</script>
+</body>
+</html>
